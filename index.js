@@ -35,6 +35,7 @@ app.get("/about", (req, res) => {
     title: "About",
     h1: "This is the about section",
     a: "Go to the form section",
+    btn: "Click here to download the photo",
   });
 });
 
