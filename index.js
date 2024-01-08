@@ -16,7 +16,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/users", usersRouter);
+app.use(express.static("./assets"));
 
+//Routes
 app.get("/", (req, res) => {
   console.log(req.url);
 
@@ -34,6 +36,10 @@ app.get("/about", (req, res) => {
     h1: "This is the about section",
     a: "Go to the form section",
   });
+});
+
+app.get("/download", (req, res) => {
+  res.download("./assets/running.jpg");
 });
 
 app.listen(PORT, () => {
