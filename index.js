@@ -3,6 +3,7 @@ const express = require("express"); // we import the express module (we can use 
 const usersRouter = require("./routes/users");
 const morgan = require("morgan");
 
+
 const app = express();
 const PORT = 3000;
 
@@ -17,6 +18,9 @@ app.use((req, res, next) => {
 
 app.use("/users", usersRouter);
 app.use(express.static("./assets"));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 
 //Routes
 app.get("/", (req, res) => {
@@ -26,9 +30,13 @@ app.get("/", (req, res) => {
 });
 
 // Render the index.ejs and about.ejs
-app.get("/form", (req, res) => {
-  res.render("form");
+app.post("/form", (req, res) => {
+  res.render("form", {name: req.body.fname});
 });
+
+// app.post("/formPost", (req, res) => {
+//   console.log(req.body.fname)
+// })
 
 app.get("/about", (req, res) => {
   res.render("about", {
